@@ -19,8 +19,21 @@ namespace DemoQaTests.Pages
             WaitForElement(_emailField).SendKeys(email);
             WaitForElement(_currentAddressField).SendKeys(currentAddress);
             WaitForElement(_permanentAddressField).SendKeys(permanentAddress);
-            WaitForElement(_submitButton).Submit();
+            WaitForElement(_submitButton).Click();
         }
 
+            public string GetOutputText()
+            {
+                var outputElement = WaitForElement(By.Id("output"));
+                return outputElement.Text;
+            }
+            public string GetInputText()
+            {
+                var username = WaitForElement(_usernameField).GetAttribute("value");
+                var email = WaitForElement(_emailField).GetAttribute("value");
+                var currentAddress = WaitForElement(_currentAddressField).GetAttribute("value");
+                var permanentAddress = WaitForElement(_permanentAddressField).GetAttribute("value");
+                return $"Name:{username}\r\nEmail:{email}\r\nCurrent Address :{currentAddress}\r\nPermananet Address :{permanentAddress}";
+            }
     }
 }
