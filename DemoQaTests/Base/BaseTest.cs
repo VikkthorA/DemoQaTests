@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
 
 namespace DemoQaTests.Base
 {
@@ -9,7 +10,7 @@ namespace DemoQaTests.Base
 
         public BaseTest()
         {
-            Driver = new ChromeDriver();
+            Driver = new EdgeDriver();
             Driver.Manage().Window.Maximize();
         }
 

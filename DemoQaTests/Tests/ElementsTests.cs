@@ -1,9 +1,9 @@
 ﻿using DemoQaTests.Base;
+using DemoQaTests.ElementsPages;
 using DemoQaTests.Pages;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 
-public class Tests : BaseTest
+
+public class ElementsTests : BaseTest
 {
     [Fact]
     public void TextBoxTest()
@@ -50,7 +50,21 @@ public class Tests : BaseTest
         Assert.Equal("Yes", radioPage.GetSelectedOption());
         radioPage.ClickImpressive();
         Assert.Equal("Impressive", radioPage.GetSelectedOption());
+    }
 
+    [Fact]
+    public void WebTables()
+    {
+        Driver.Navigate().GoToUrl("https://demoqa.com/webtables");
+        var webTablesPage = new WebTablesPage(Driver);
+        webTablesPage.AddNewRecord("John", "Doe", "john@example.com", "30", "50000", "IT");
+        webTablesPage.ClickEditButton("john@example.com");
+        webTablesPage.EditRecord(age: "77");
+        webTablesPage.ClickDeleteButton("alden@example.com");
+        webTablesPage.SearchRecord("Cierra");
+        webTablesPage.ClickDeleteButton("cierra@example.com");
+        webTablesPage.SearchClear();    
+        webTablesPage.SelectRowsPerPage("50");
     }
 
 }
