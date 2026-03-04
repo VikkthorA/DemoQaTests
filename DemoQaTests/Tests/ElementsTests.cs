@@ -82,5 +82,49 @@ public class ElementsTests : BaseTest
 
     }
 
+    [Fact]
+  public void LinksTest()
+    {
+        Driver.Navigate().GoToUrl("https://demoqa.com/links");
+        var linksPage = new LinksPage(Driver);
+
+        var allOriginalWindows = new List<string>(Driver.WindowHandles);
+        var firstWindow = allOriginalWindows[0]; 
+
+        linksPage.ClickHomeLink();
+        linksPage.WaitForNewTab();
+        linksPage.SwitchToNewTab();
+        Driver.Close();
+        Driver.SwitchTo().Window(firstWindow);
+
+        linksPage.ClickDynamicLink();
+        linksPage.WaitForNewTab();
+        linksPage.SwitchToNewTab();
+        Driver.Close();
+        Driver.SwitchTo().Window(firstWindow);
+
+        linksPage.ClickApiLink("created");
+        Assert.Contains("201", linksPage.GetApiResponse("created"));
+
+        linksPage.ClickApiLink("no-content");
+        Assert.Contains("204", linksPage.GetApiResponse("no-content"));
+
+        linksPage.ClickApiLink("moved");
+        Assert.Contains("301", linksPage.GetApiResponse("moved"));
+
+        linksPage.ClickApiLink("bad-request");
+        Assert.Contains("400", linksPage.GetApiResponse("bad-request"));
+
+        linksPage.ClickApiLink("unauthorized");
+        Assert.Contains("401", linksPage.GetApiResponse("unauthorized"));
+
+        linksPage.ClickApiLink("forbidden");
+        Assert.Contains("403", linksPage.GetApiResponse("forbidden"));
+
+        linksPage.ClickApiLink("invalid-url");
+        Assert.Contains("404", linksPage.GetApiResponse("invalid-url"));
+
+    }
 
 }
+        
