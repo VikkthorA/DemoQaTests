@@ -67,4 +67,20 @@ public class ElementsTests : BaseTest
         webTablesPage.SelectRowsPerPage("50");
     }
 
+
+    [Fact]
+    public void ButtonClicks()
+    {
+        Driver.Navigate().GoToUrl("https://demoqa.com/buttons");
+        var buttonsPage = new ButtonsPage(Driver);
+        buttonsPage.PerformDoubleClick();
+        Assert.Equal("You have done a double click", buttonsPage.GetDoubleClickMessage());
+        buttonsPage.PerformRightClick();
+        Assert.Equal("You have done a right click", buttonsPage.GetRightClickMessage());
+        buttonsPage.PerformClickMeButton();
+        Assert.Equal("You have done a dynamic click", buttonsPage.GetDynamicClickMessage());
+
+    }
+
+
 }
