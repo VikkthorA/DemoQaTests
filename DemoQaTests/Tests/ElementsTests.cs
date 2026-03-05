@@ -154,5 +154,21 @@ public class ElementsTests : BaseTest
         string resultText = filesManagerPage.GetUploadedFilePathText();
         Assert.Contains(fileName, resultText);
     }
+    [Fact]
+    public void DynamicPropertiesTest()
+    {
+        Driver.Navigate().GoToUrl("https://demoqa.com/dynamic-properties");
+        var dynamicPage = new DynamicButton(Driver);
+
+        Assert.True(dynamicPage.isVisiableAfterButtonDisplay());
+
+        string finalColor = dynamicPage.GetColorChangeButtonColor();
+        Assert.True(
+         finalColor.StartsWith("rgb(220, 53, 69") ||
+         finalColor.StartsWith("rgba(220, 53, 69"));
+
+
+        Assert.True(dynamicPage.isButtonEnabled());
+    }
 }
 
