@@ -135,5 +135,24 @@ public class ElementsTests : BaseTest
         brokenLinksPage.ValidateImages();
         brokenLinksPage.ValidateLinks();
     }
+    [Fact]
+    public void UploadDownloadFile()
+    {
+        Driver.Navigate().GoToUrl("https://demoqa.com/upload-download");
+        var filesManagerPage = new FilesManagerPage(Driver);
+
+        string userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile); //the path to the user's folder
+        string downloadsFolder = Path.Combine(userPath, "Downloads");
+        string fileName = "sampleFile.jpeg"; 
+        string fullPath = Path.Combine(downloadsFolder, fileName);
+
+        filesManagerPage.ClickDownload();
+
+        Assert.True(File.Exists(fullPath)); // Verify that the file was downloaded successfully
+
+        filesManagerPage.UploadFile(fullPath);
+        string resultText = filesManagerPage.GetUploadedFilePathText();
+        Assert.Contains(fileName, resultText);
+    }
 }
 
