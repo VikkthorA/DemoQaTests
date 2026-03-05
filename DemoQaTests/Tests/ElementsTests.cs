@@ -1,6 +1,8 @@
 ﻿using DemoQaTests.Base;
 using DemoQaTests.ElementsPages;
 using DemoQaTests.Pages;
+using OpenQA.Selenium;
+using System.Diagnostics;
 
 
 public class ElementsTests : BaseTest
@@ -63,7 +65,7 @@ public class ElementsTests : BaseTest
         webTablesPage.ClickDeleteButton("alden@example.com");
         webTablesPage.SearchRecord("Cierra");
         webTablesPage.ClickDeleteButton("cierra@example.com");
-        webTablesPage.SearchClear();    
+        webTablesPage.SearchClear();
         webTablesPage.SelectRowsPerPage("50");
     }
 
@@ -83,13 +85,13 @@ public class ElementsTests : BaseTest
     }
 
     [Fact]
-  public void LinksTest()
+    public void LinksTest()
     {
         Driver.Navigate().GoToUrl("https://demoqa.com/links");
         var linksPage = new LinksPage(Driver);
 
         var allOriginalWindows = new List<string>(Driver.WindowHandles);
-        var firstWindow = allOriginalWindows[0]; 
+        var firstWindow = allOriginalWindows[0];
 
         linksPage.ClickHomeLink();
         linksPage.WaitForNewTab();
@@ -125,6 +127,13 @@ public class ElementsTests : BaseTest
         Assert.Contains("404", linksPage.GetApiResponse("invalid-url"));
 
     }
-
+    [Fact]
+    public void BrokenLinksTest()
+    {
+        Driver.Navigate().GoToUrl("https://demoqa.com/broken");
+        var brokenLinksPage = new BrokenLinks(Driver);
+        brokenLinksPage.ValidateImages();
+        brokenLinksPage.ValidateLinks();
+    }
 }
-        
+
