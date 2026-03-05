@@ -34,10 +34,7 @@ namespace DemoQaTests.ElementsPages
 
         public void ClickApiLink(string apiId)
         {
-            var element = WaitForElement(By.Id(apiId));
-
-            Actions actions = new Actions(Driver);
-            actions.MoveToElement(element).Click().Perform(); //scrolls to the element and clicks it
+            var element = WaitForElement(By.Id(apiId)); 
 
             element.Click();
             WaitForElement(_linkResponse);
@@ -48,7 +45,7 @@ namespace DemoQaTests.ElementsPages
             var element = WaitForElement(By.Id(apiId));
 
             ((IJavaScriptExecutor)Driver).ExecuteScript("arguments[0].scrollIntoView({block: 'center'});", element);
-
+            //scrolls to the element and clicks it
             element.Click();
             return WaitForElement(_linkResponse).Text;  
         }

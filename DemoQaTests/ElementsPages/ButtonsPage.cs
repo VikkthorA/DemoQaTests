@@ -14,9 +14,7 @@ namespace DemoQaTests.ElementsPages
         private readonly By _dynamicClickMessage = By.Id("dynamicClickMessage");
 
 
-        public ButtonsPage(IWebDriver driver) : base(driver)
-        {
-        }
+        public ButtonsPage(IWebDriver driver) : base(driver) { }
 
         public void DoubleClickButton() => WaitForElement(_doubleClickBtn);
         public void RightClickButton() => WaitForElement(_rightClickBtn);
@@ -37,7 +35,7 @@ namespace DemoQaTests.ElementsPages
         {
             var element = WaitForElement(_rightClickBtn);
             new Actions(Driver).
-                ContextClick(element).
+                ContextClick(element).  
                 Perform();
 
         }
