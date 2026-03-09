@@ -18,6 +18,13 @@ namespace DemoQaTests.Base
         {
             return Wait.Until(ExpectedConditions.ElementIsVisible(locator));
         }
-
+        public void ScrollToElement(By locator)
+        {
+            var element = WaitForElement(locator);
+            IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
+            js.ExecuteScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", element);
+        }
     }
+
 }
+
