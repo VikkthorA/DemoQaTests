@@ -23,13 +23,13 @@ namespace DemoQaTests.Forms
         private readonly By _city = By.CssSelector("#city input");
         private readonly By _submitButton = By.Id("submit");
 
-        public void selectGender(string genderName)
+        public void SelectGender(string genderName)
         {
             var gender = Driver.FindElements(_genderLabel);
             var target = gender.FirstOrDefault(g => g.Text == genderName);
             target?.Click();
         }
-        public void selectHobbies(string hobbyName)
+        public void SelectHobbies(string hobbyName)
         {
             var hobby = Driver.FindElements(_hobbiesLabels);
             var target = hobby.FirstOrDefault(h => h.Text == hobbyName);
@@ -79,11 +79,11 @@ namespace DemoQaTests.Forms
             Driver.FindElement(_firstNameInput).SendKeys(fName);
             Driver.FindElement(_lastNameInput).SendKeys(lName);
             Driver.FindElement(_emailInput).SendKeys(email);
-            selectGender(gender);
+            SelectGender(gender);
             MobileField(mobile);
             SetDateOfBirth(day, month, year);
             SubjectSelect(subject);
-            selectHobbies(hobby);
+            SelectHobbies(hobby);
             UploadFile(filePath);
             CurrentAdress(address);
             ScrollToElement(_state);
@@ -92,7 +92,7 @@ namespace DemoQaTests.Forms
         }
         public Dictionary<string, string> GetResultsAsDictionary()
         {
-            var results = new Dictionary<string, string>();
+           var results = new Dictionary<string, string>();
 
            var rows = Driver.FindElements(By.CssSelector(".table-responsive tbody tr"));
             foreach (var row in rows)
@@ -116,7 +116,7 @@ namespace DemoQaTests.Forms
         public void MobileField(string mobile)
         {
            var mobileNum = Driver.FindElement(_mobileInput);
-            mobileNum.SendKeys(mobile);
+           mobileNum.SendKeys(mobile);
         }
         public void SubmitButton() => Driver.FindElement(_submitButton).Click();
         public void CurrentAdress(string adress)
