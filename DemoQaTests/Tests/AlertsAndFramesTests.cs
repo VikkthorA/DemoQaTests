@@ -71,4 +71,17 @@ public class AlertsAndFramesTests : BaseTest
         Assert.Equal("Parent frame", parentFrameText);
         Assert.Equal("Child Iframe", childFrameText);
     }
+
+    [Fact]
+    public void ModalDialogsTest()
+    {
+        var modalsPage = new ModalsPage(Driver);
+        Driver.Navigate().GoToUrl("https://demoqa.com/modal-dialogs");
+        var (smallModalTitle, smallModalBody) = modalsPage.GetSmallModalContent();
+        Assert.Equal("Small Modal", smallModalTitle);
+        Assert.Equal("This is a small modal. It has very less content", smallModalBody);
+        var (largeModalTitle, largeModalBody) = modalsPage.GetLargeModalContent();
+        Assert.Equal("Large Modal", largeModalTitle);
+        Assert.Equal("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", largeModalBody);
+    }
 }
