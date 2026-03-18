@@ -60,4 +60,15 @@ public class AlertsAndFramesTests : BaseTest
         Assert.Equal("This is a sample page", frame1Text);
         Assert.Equal("This is a sample page", frame2Text);
     }
+
+    [Fact]
+    public void NestedFramesTest()
+    {
+        var nestedFramesPage = new NestedFramesPage(Driver);
+        Driver.Navigate().GoToUrl("https://demoqa.com/nestedframes");
+        string parentFrameText = nestedFramesPage.GetTextFromParent();
+        string childFrameText = nestedFramesPage.GetTextFromChild();
+        Assert.Equal("Parent frame", parentFrameText);
+        Assert.Equal("Child Iframe", childFrameText);
+    }
 }
