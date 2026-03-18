@@ -11,7 +11,7 @@ public class AlertsAndFramesTests : BaseTest
     public void NewWindows()
     {
         var browserWindowsPage = new BrowserWindowsPage(Driver);
-        
+
         Driver.Navigate().GoToUrl("https://demoqa.com/browser-windows");
         var newTabText = browserWindowsPage.GetTextFromNewTab();
         var newWindowText = browserWindowsPage.GetTextFromNewTab();
@@ -44,11 +44,20 @@ public class AlertsAndFramesTests : BaseTest
 
 
         string promptAlertText = alertsPage.ClickPromptButton("Test input");
-        Assert.Equal("Please enter your name", promptAlertText); 
+        Assert.Equal("Please enter your name", promptAlertText);
 
-        string promptResultText = alertsPage.GetPromptResult();  
+        string promptResultText = alertsPage.GetPromptResult();
         Assert.Contains("Test input", promptResultText);
+    }
 
-
+    [Fact]
+    public void FramesTest()
+    {
+        var framesPage = new FramesPage(Driver);
+        Driver.Navigate().GoToUrl("https://demoqa.com/frames");
+        string frame1Text = framesPage.GetFrame1HeadingText();
+        string frame2Text = framesPage.GetTextFromFrame2();
+        Assert.Equal("This is a sample page", frame1Text);
+        Assert.Equal("This is a sample page", frame2Text);
     }
 }
