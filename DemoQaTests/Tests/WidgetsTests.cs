@@ -17,4 +17,27 @@ public class WidgetsTests : BaseTest
             Assert.True(accordianPage.IsExpanded(i));
         }
     }
+
+    [Fact]
+    public void TestColorAutocomplete()
+    {
+        Driver.Navigate().GoToUrl("https://demoqa.com/auto-complete");
+        var autoCompletePage = new AutoComplete(Driver);
+
+        autoCompletePage.MultipleColorsInput("R");  // selectIndex=0 (default)
+
+        autoCompletePage.MultipleColorsInput("Y");  // ArrowDown x2
+
+        autoCompletePage.MultipleColorsInput("B", 2); //blue
+
+        autoCompletePage.RemoveColorTag("Blue");
+        autoCompletePage.RemoveColorTag("Yellow");
+
+        autoCompletePage.MultipleColorsInput("Purple");
+
+        autoCompletePage.SingleColorInput("Red");
+        autoCompletePage.SingleColorInput("Green");
+
+    }
+
 }
