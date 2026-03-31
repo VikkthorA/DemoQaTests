@@ -42,7 +42,7 @@ namespace DemoQaTests.Widgets
         public void SelectMonthByArrows(string day, string month, string year, string time)
         {
             OpenCalendar();
-            SelectMonthByClick(month);
+            SelectMonthByArrows(month);
             SelectYearSmart(year);
             SelectDay(day);
             SelectTime(time);
