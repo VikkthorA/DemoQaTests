@@ -33,7 +33,7 @@ namespace DemoQaTests.ElementsPages
         private readonly By _validLink = By.LinkText("Click Here for Valid Link");
         private readonly By _brokenLink = By.LinkText("Click Here for Broken Link");
 
-        public bool isLinkValid(By linkLocator)
+        public async Task<bool> isLinkValid(By linkLocator)
         {
             var linkElement = WaitForElement(linkLocator);
             var url = linkElement.GetAttribute("href");
@@ -41,7 +41,7 @@ namespace DemoQaTests.ElementsPages
             using var httpClient = new HttpClient();
             try
             {
-                var response = httpClient.GetAsync(url).Result;
+                var response = await httpClient.GetAsync(url);
 
                 return response.IsSuccessStatusCode; //  status code is 200-299
             }
