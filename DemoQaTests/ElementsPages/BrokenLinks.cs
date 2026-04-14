@@ -50,10 +50,10 @@ namespace DemoQaTests.ElementsPages
                 return false; //  status code is 400-599
             }
         }
-        public void ValidateLinks()
+        public async Task ValidateLinks()
         { 
-            Assert.True(isLinkValid(_validLink)); // return 200 - true
-            Assert.False(isLinkValid(_brokenLink)); // return 500 - false
+            Assert.True(await isLinkValid(_validLink)); // return 200 - true
+            Assert.False(await isLinkValid(_brokenLink)); // return 500 - false
         }
 
     }
