@@ -1,5 +1,6 @@
 ﻿using DemoQaTests.Base;
 using DemoQaTests.Widgets;
+using OpenQA.Selenium;
 
 public class WidgetsTests : BaseTest
 {
@@ -54,4 +55,19 @@ public class WidgetsTests : BaseTest
 
         datePickerPage.SetDateAndTime("10", "December", "2025", "22:45");
     }
+    [Fact]
+    public void TestSlider()
+    {
+    Driver.Navigate().GoToUrl("https://demoqa.com/slider");
+        var sliderPage = new SliderPage(Driver);
+
+    sliderPage.MoveSliderByOffset(120);
+
+    string actualSliderValue = sliderPage.GetSliderAttributeValue();
+
+    string boxValue = sliderPage.GetValueFromBox();
+
+    Assert.Equal(actualSliderValue, boxValue);    
+    }
+
 }
