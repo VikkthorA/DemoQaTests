@@ -70,4 +70,20 @@ public class WidgetsTests : BaseTest
     Assert.Equal(actualSliderValue, boxValue);    
     }
 
+    [Fact]
+    public void ProgressBar_ShouldReach100Percent_AndShowResetButton()
+    {
+        Driver.Navigate().GoToUrl("https://demoqa.com/progress-bar");
+
+        var progressBarPage = new ProgressBarPage(Driver);
+
+        progressBarPage.ClickStart();
+
+        bool isResetDisplayed = progressBarPage.WaitForResetButton();
+
+        Assert.True(isResetDisplayed);
+
+        string finalValue = progressBarPage.GetProgressBarValue();
+        Assert.Equal("100%", finalValue);
+    }
 }
